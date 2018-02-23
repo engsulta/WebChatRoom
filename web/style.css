@@ -39,8 +39,6 @@ form{
     height: 50px;
     margin-top: 20%;
     border-radius: 25px;
-    text-transform: uppercase;
-    transition: all 0.2s ease-in-out;
 }
 .btn:hover{
     background-color: rgb(110, 250, 157);
@@ -53,7 +51,6 @@ form{
     width: 400px;
     height: 50px;
     border-radius: 25px;
-    text-transform: uppercase;
     display: block;
 }
 .lab{

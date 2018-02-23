@@ -6,9 +6,9 @@
 package com.login;
 
 import com.dao.Contact;
-import static com.msg.LoadContacts.allcontacts;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
+    public static Vector<Contact> allcontacts = new Vector<>();
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,17 +45,18 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         String name = request.getParameter("username");
         String password = request.getParameter("password");
-         System.out.println(name + password);
+        System.out.println(name + password);
         int id = allcontacts.size();
-        //HttpSession session = request.getSession(true);
-        //session.setAttribute("userid", id);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("userid", id);
+        session.setAttribute("username", name);
+
         allcontacts.add(new Contact(name, password, "online"));
         RequestDispatcher rd = request.getRequestDispatcher("main.html");
         rd.forward(request, response);
-        
 
     }
 

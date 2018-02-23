@@ -7,6 +7,7 @@ package com.msg;
 
 import com.dao.Contact;
 import com.google.gson.Gson;
+import static com.login.RegisterServlet.allcontacts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
@@ -24,7 +25,6 @@ import javax.servlet.http.HttpSession;
 public class LoadContacts extends HttpServlet {
 
 
-    public static Vector<Contact> allcontacts = new Vector<>();
     
 
     @Override

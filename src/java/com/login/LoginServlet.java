@@ -6,7 +6,7 @@
 package com.login;
 
 import com.dao.Contact;
-import static com.msg.LoadContacts.allcontacts;
+import static com.login.RegisterServlet.allcontacts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -77,8 +77,9 @@ public class LoginServlet extends HttpServlet {
 
         }
         if (exists) {
-           // HttpSession session = request.getSession(true);
-            //session.setAttribute("userid", id);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userid", id);
+            session.setAttribute("username",name);
             allcontacts.get(id).setStatus("online");
             RequestDispatcher rd = request.getRequestDispatcher("main.html");
             rd.forward(request, response);

@@ -50,18 +50,19 @@ public class MainServlet extends HttpServlet {
             throws ServletException, IOException {
        // processRequest(request, response);
        
-        int lastmsgid = Integer.parseInt(request.getParameter("lastid"));
+      //  int lastmsgid = Integer.parseInt(request.getParameter("lastid"));
+       // int lastmsgid =0;
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         
         Gson gsonMessages = new Gson();
         String jsonString;
-        if (allmessages.size() - 1 > lastmsgid) {
-            jsonString = gsonMessages.toJson(getmessagesfrom(lastmsgid));
-            out.write(jsonString);
-        } else {
+//        if (allmessages.size() - 1 > lastmsgid) {
+//            jsonString = gsonMessages.toJson(getmessagesfrom(lastmsgid));
+//            out.write(jsonString);
+//        } else {
             jsonString = gsonMessages.toJson(allmessages);
-        }
+//        }
         out.write(jsonString);
     }
 
