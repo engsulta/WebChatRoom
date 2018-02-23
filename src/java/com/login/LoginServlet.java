@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
         int id = 0;
         boolean exists = false;
         System.out.println(name);
+        if(allcontacts!=null){
         for (Contact contact : allcontacts) {
             if (contact.getName().equals(name)) {
                 id = contact.getId();
@@ -74,7 +75,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("index.html");
             System.out.println("this user not in my DB");
         }
-
+        }
     }
 
     /**
