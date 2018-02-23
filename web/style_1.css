@@ -44,6 +44,7 @@ body {
 #txtmsg{
     position: relative;
     width: 100%;
+    height: 50px;
     border: 2px;;
     padding: 5px;
 
@@ -59,7 +60,7 @@ body {
     width: 100px;
     height: 50px;
     border-radius: 25px;
-    background-color: rgba(100, 233, 103, 0.5);
+    background-color: #4CAF50;
     padding: 5px;
     color: rgb(44, 156, 184);
     font-size: 16px;
