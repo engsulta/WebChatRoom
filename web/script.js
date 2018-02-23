@@ -38,7 +38,7 @@ function ajaxcallContact() {
 }
 function sendMessage() {
 
-    var name = "owner";//$("#msgOwner").html;
+    var name = "you";//$("#msgOwner").html;
     var body = $("#txtmsg").val();
     $("#txtmsg").val = "";
 
