@@ -1,0 +1,100 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 23, 2018, 11:52:23 AM
+    Author     : sulta
+*/
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-image: url("back1.jpg");
+    background-size: 100%,100%;
+    font-family: sans-serif;
+}
+.leftside{
+    position: relative;
+    height: 70vh;
+    width: 40%;
+    left: 5%;
+    margin-top: 40px;
+    padding: 3%;
+    display: block;
+}
+#chatarea{
+    position: relative;
+    height: 80%;
+    width: 100%;
+    margin-bottom: 1%;
+    background-color: gray;
+
+
+
+}
+#chatmsg{
+    position: relative;
+    height: 20%;
+    width: 100%;
+    margin-bottom: 1%;
+
+}
+#txtmsg{
+    position: relative;
+    width: 100%;
+    border: 2px;;
+    padding: 5px;
+
+    color: rgb(44, 156, 184);
+    border-radius: 25px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom:10px;
+
+}
+#sendbtn{
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: rgba(100, 233, 103, 0.5);
+    padding: 5px;
+    color: rgb(44, 156, 184);
+    font-size: 16px;
+
+}
+#sendbtn:hover{
+    background-color: rgb(110, 250, 157);
+
+}
+#chatOwner{
+    position: relative;
+    bottom: 3%;
+    left:48%;
+    width: 50px;
+    height: 20px;
+    border-radius: 25px;
+    align-items: center;
+    color: rgb(44, 156,184);
+    background-color: rgb(110, 250, 157);
+
+
+}
+.lab{
+    color: rgb(44, 156, 184);
+    margin-bottom: 5px;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+}
+
+#contactarea{
+    position: absolute;
+    height: 70%;
+    width: 20%;
+    left:60%;
+    top:10%;
+    background-color: gray;
+}
