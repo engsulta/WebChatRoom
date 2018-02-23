@@ -59,9 +59,9 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println(name + password);
-        int id = allcontacts.size();
 
         allcontacts.add(new Contact(name, password, "online"));
+        int id = allcontacts.size();
         servletContext.setAttribute("allcontacts", allcontacts);
 
         RequestDispatcher rd = request.getRequestDispatcher("main.html");
