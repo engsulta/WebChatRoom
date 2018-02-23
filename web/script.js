@@ -1,12 +1,13 @@
 var lastrecieved = 0;
 $(document).ready(function () {
-    initchat();
     initcontact();
 
+    initchat();
+    
 });
 $("#sendbtn").click(sendMessage);
 function initcontact() {
-    setInterval(ajaxcallContact, 8000);
+    setInterval(ajaxcallContact, 6000);
 }
 function initchat() {
     setInterval(ajaxcallChat, 5000);
@@ -29,13 +30,10 @@ function ajaxcallChat() {
 }
 function ajaxcallContact() {
     $('.tablerow2').remove();
-    $.ajax({url: "LoadContacts", contentType: 'application/json', dataType: 'json', type: 'POST', success: function (result) {
+    $.ajax({url: "GetContacts", contentType: 'application/json', dataType: 'json', type: 'POST', success: function (result) {
             for (var i = 0; i < result.length; i++) {
-                // $('#contactarea').append('<div class="contactrow"><p class="contactname">' + result[i].name + '</p><p class="contactstatus">' + result[i].status + '</p></div>');
                 $('#myTable2').append('<tr class="tablerow2"><td>' + result[i].name + '</td><td>' + result[i].status + '</td></tr>');
             }
-
-
         }});
 }
 function sendMessage() {
