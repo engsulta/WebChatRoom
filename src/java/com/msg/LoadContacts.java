@@ -11,6 +11,8 @@ import static com.login.RegisterServlet.allcontacts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,15 +26,10 @@ import javax.servlet.http.HttpSession;
 
 public class LoadContacts extends HttpServlet {
 
-
+ServletConfig sconf;
     
 
-    @Override
-    public void init() throws ServletException {
-
-    }
-
-    /**
+        /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -41,6 +38,10 @@ public class LoadContacts extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public void init(ServletConfig sc) throws ServletException {
+        sconf = sc;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -69,6 +70,8 @@ public class LoadContacts extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
+       ServletContext servletContext = sconf.getServletContext();
+        allcontacts=(Vector<Contact>) servletContext.getAttribute("allcontacts");
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         Gson gsonContacts=new Gson();

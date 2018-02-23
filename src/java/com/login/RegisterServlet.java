@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
+
     public static Vector<Contact> allcontacts = new Vector<>();
+    ServletConfig sconf = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,18 +47,23 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
+    public void init(ServletConfig sc) throws ServletException {
+        sconf = sc;
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        ServletContext servletContext = sconf.getServletContext();
         String name = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println(name + password);
         int id = allcontacts.size();
-        HttpSession session = request.getSession(true);
-        session.setAttribute("userid", id);
-        session.setAttribute("username", name);
 
         allcontacts.add(new Contact(name, password, "online"));
+        servletContext.setAttribute("allcontacts", allcontacts);
+
         RequestDispatcher rd = request.getRequestDispatcher("main.html");
         rd.forward(request, response);
 
