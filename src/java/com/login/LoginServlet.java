@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
         boolean exists = false;
         System.out.println(name);
         for (Contact contact : allcontacts) {
-            if (contact.getName() == name) {
+            if (contact.getName().equals(name)) {
                 id = contact.getId();
                 contact.setStatus("online");
                 exists = true;
