@@ -63,7 +63,8 @@ public class RegisterServlet extends HttpServlet {
         allcontacts.add(new Contact(name, password, "online"));
         int id = allcontacts.size();
         servletContext.setAttribute("allcontacts", allcontacts);
-
+        HttpSession session = request.getSession(true);
+        session.setAttribute("username", name);
         RequestDispatcher rd = request.getRequestDispatcher("main.html");
         rd.forward(request, response);
 

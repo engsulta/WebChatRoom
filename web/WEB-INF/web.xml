@@ -4,7 +4,7 @@
         <servlet-name>LoadContacts</servlet-name>
         <servlet-class>com.msg.LoadContacts</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>com.msg.MainServlet</servlet-class>
     </servlet>
@@ -16,11 +16,15 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.login.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetContacts</servlet-name>
+        <servlet-class>com.msg.GetContacts</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/MainServlet</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LoadContacts</servlet-name>
         <url-pattern>/LoadContacts</url-pattern>
     </servlet-mapping>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetContacts</servlet-name>
+        <url-pattern>/GetContacts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
