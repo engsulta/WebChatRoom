@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 23, 2018, 11:52:23 AM
+    Author     : sulta
+*/
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-image: url("back1.jpg");
+    background-size: 100%,100%;
+    font-family: sans-serif;
+}
+form{
+    position: relative;
+    height: 50vh;
+    width: 30%;
+    left: 35%;
+    margin-top: 40px;
+    padding: 3%;
+    background-color: rgba(169, 226, 243, 0.363);
+    overflow: hidden;
+    opacity: .8;
+    display: block;
+    border-radius: 25px;
+
+
+}
+.btn{
+    border: none;
+    padding: 5px;
+    color: rgb(44, 156, 184);
+    background-color: #D5D5D5;
+    width: 100px;
+    height: 50px;
+    margin-top: 20%;
+    border-radius: 25px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+.btn:hover{
+    background-color: rgb(110, 250, 157);
+
+}
+.txt{
+    border: none;
+    padding: 5px;
+    color: rgb(44, 156, 184);
+    width: 400px;
+    height: 50px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    display: block;
+}
+.lab{
+    color: rgb(44, 156, 184);
+    margin-bottom: 5px;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+}
