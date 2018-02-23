@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
+
     ServletConfig sconf = null;
 
     /**
@@ -48,33 +49,33 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         ServletContext servletContext = sconf.getServletContext();
-        allcontacts=(Vector<Contact>) servletContext.getAttribute("allcontacts");
+        allcontacts = (Vector<Contact>) servletContext.getAttribute("allcontacts");
         String name = request.getParameter("username");
         String password = request.getParameter("password");
         int id = 0;
         boolean exists = false;
         System.out.println(name);
-        if(allcontacts!=null){
-        for (Contact contact : allcontacts) {
-            if (contact.getName().equals(name)) {
-                id = contact.getId();
-                contact.setStatus("online");
-                exists = true;
+        if (allcontacts != null) {
+            for (Contact contact : allcontacts) {
+                if (contact.getName().equals(name)) {
+                    id = contact.getId();
+                    contact.setStatus("online");
+                    exists = true;
+                }
+
             }
+            if (exists) {
 
-        }
-        if (exists) {
+                RequestDispatcher rd = request.getRequestDispatcher("main.html");
+                rd.forward(request, response);
 
-            RequestDispatcher rd = request.getRequestDispatcher("main.html");
-            rd.forward(request, response);
-
-        } else {
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.write("not found in db");
-            response.sendRedirect("index.html");
-            System.out.println("this user not in my DB");
-        }
+            } else {
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.write("not found in db");
+                response.sendRedirect("index.html");
+                System.out.println("this user not in my DB");
+            }
         }
     }
 
@@ -90,13 +91,36 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        ServletContext servletContext = sconf.getServletContext();
+        allcontacts = (Vector<Contact>) servletContext.getAttribute("allcontacts");
+        HttpSession session = request.getSession(true);
+        String name=(String)session.getAttribute("username");
+        boolean exists = false;
+
+        if (allcontacts != null) {
+            for (Contact contact : allcontacts) {
+                if (contact.getName().equals(name)) {
+                    contact.setStatus("offline");
+                    exists = true;
+                }
+
+            }
+            if (exists) {
+
+                RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                rd.forward(request, response);
+
+            } else {
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.write("not found in db");
+                response.sendRedirect("index.html");
+                System.out.println("this user not in my DB");
+            }
+        }
+
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
