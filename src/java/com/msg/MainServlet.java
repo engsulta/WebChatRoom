@@ -20,11 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sulta
  */
- @WebServlet(name="MainServlet",
-
-        urlPatterns={"/MainServlet"}
-
-        )
+@WebServlet(name = "MainServlet",
+        urlPatterns = {"/MainServlet"}
+)
 public class MainServlet extends HttpServlet {
 
     public static Vector<Message> allmessages = new Vector<>();
@@ -34,34 +32,15 @@ public class MainServlet extends HttpServlet {
 
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+
         String name = request.getParameter("name");
         String body = request.getParameter("body");
-        System.out.println(id);
-
         System.out.println(name);
         System.out.println(body);
-        Message recieved = new Message(id, name, body);
+        Message recieved = new Message(allmessages.size(), name, body);
         allmessages.add(recieved);
 
     }
@@ -69,11 +48,20 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
+       // processRequest(request, response);
+       
+        int lastmsgid = Integer.parseInt(request.getParameter("lastid"));
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
+        
         Gson gsonMessages = new Gson();
-        String jsonString = gsonMessages.toJson(allmessages);
+        String jsonString;
+        if (allmessages.size() - 1 > lastmsgid) {
+            jsonString = gsonMessages.toJson(getmessagesfrom(lastmsgid));
+            out.write(jsonString);
+        } else {
+            jsonString = gsonMessages.toJson(allmessages);
+        }
         out.write(jsonString);
     }
 
@@ -86,5 +74,16 @@ public class MainServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Vector<Message> getmessagesfrom(int lastmsgid) {
+        Vector<Message> ret = new Vector<>();
+        for (Message message : allmessages) {
+            if (message.getId() > lastmsgid) {
+                ret.add(message);
+            }
+
+        }
+        return ret;
+    }
 
 }

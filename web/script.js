@@ -1,6 +1,7 @@
-var lastrecieved = 0;
+$(function() {
+    var lastrecieved=0;
+
 $(document).ready(function () {
-    lastrecieved = 0;
     initchat();
     initcontact();
 
@@ -10,19 +11,22 @@ $("#sendbtn").click(sendMessage);
 
 
 function initcontact() {
-    setInterval(ajaxcallContact, 10000);
+    setInterval(ajaxcallContact, 20000);
 }
 function initchat() {
-    setInterval(ajaxcallChat, 5000);
+    setInterval(ajaxcallChat, 10000);
 }
 function ajaxcallChat() {
-    $('.msgRow').remove();
-    $.ajax({url: "MainServlet", contentType: 'application/json', dataType: 'json', type: 'POST', success: function (result) {
+    //$('.msgRow').remove();
+  
+    var jsonDa = {"lastid": 0};
+    $.ajax({url: "MainServlet", contentType: 'application/json', data: jsonDa, dataType: 'json', type: 'POST', success: function (result) {
             for (var i = 0; i < result.length; i++) {
                 $('#chatarea').append('<div class="msgrow"><p class="msgname">' + result[i].name + '</p><br><p class="msgbody">' + result[i].body + '</p></div>');
             }
+            if(result.length-1>0){
             lastrecieved = result[result.length - 1].id;
-
+            }else{lastrecieved=0;}
         }});
 }
 function ajaxcallContact() {
@@ -36,12 +40,12 @@ function ajaxcallContact() {
         }});
 }
 function sendMessage() {
-    var id = lastrecieved;
-    var name = "ahmed";
+    
+    var name = "owner";//$("#msgOwner").html;
     var body = $("#txtmsg").val();
     $("#txtmsg").val = "";
 
-    var jsonData = {"id": id, "name": name, "body": body};
+    var jsonData = {"name": name, "body": body};
 
     $.ajax({url: "MainServlet", contentType: 'application/json', data: jsonData, dataType: 'json', type: 'GET', success: function (result) {
             alert(result.body);//           
@@ -49,3 +53,4 @@ function sendMessage() {
         }});
 
 }
+});
